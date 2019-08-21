@@ -13,33 +13,18 @@ import (
 
 // ReadMessage reads a message from the given file.
 func ReadMessage(path string) (*model.IncomingWebhookRequest, error) {
-	b, err := ioutil.ReadFile(path)
+	bytesMsg, err := ioutil.ReadFile(path)
 	if err != nil {
 		return &model.IncomingWebhookRequest{}, err
 	}
 
-	incomingMessage, err := model.IncomingWebhookRequestFromJson(bytes.NewReader(b))
-	if err != nil {
-		return &model.IncomingWebhookRequest{}, errors.Wrap(err, "unmarshaling")
+	iwr, _ := model.IncomingWebhookRequestFromJson(bytes.NewReader(bytesMsg))
+	if iwr == nil {
+		return &model.IncomingWebhookRequest{}, errors.Errorf("error parsing the message")
 	}
 
-	return incomingMessage, nil
+	return iwr, nil
 }
-
-// // WriteMessage writes a message to the given file.
-// func WriteMessage(path string, msg *Message) error {
-// 	b, err := json.MarshalIndent(msg, "", "  ")
-// 	if err != nil {
-// 		return errors.Wrap(err, "marshaling")
-// 	}
-
-// 	err = ioutil.WriteFile(path, b, 0755)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	return nil
-// }
 
 // Send a message to the given webhook url.
 func Send(url string, msg *model.IncomingWebhookRequest) error {
