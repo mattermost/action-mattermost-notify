@@ -1,4 +1,4 @@
-workflow "Build and Deploy" {
+workflow "Send Message" {
   on = "pull_request"
   resolves = ["Generate", "Send Message"]
 }
