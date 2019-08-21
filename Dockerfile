@@ -11,4 +11,4 @@ LABEL "com.github.actions.color"="white"
 
 RUN go get github.com/cpanato/action-mattermost-notify
 
-ENTRYPOINT ["mattermost"]
+ENTRYPOINT ["action-mattermost-notify"]
