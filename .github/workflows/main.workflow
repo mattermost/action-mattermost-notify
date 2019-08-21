@@ -1,5 +1,6 @@
 workflow "Build and Deploy" {
   on = "pull_request"
+  resolves = ["Generate", "Send Message"]
 }
 
 action "Generate" {
