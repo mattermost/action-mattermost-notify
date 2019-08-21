@@ -12,5 +12,4 @@ jobs:
         echo "{\"text\":\"testing github action :tada:\"}" > mattermost.json
         echo test, and deploy your project.
     - uses: cpanato/action-mattermost-notify@master
-      with:
-        secrets: ["MATTERMOST_WEBHOOK_URL"]
+      secrets: ["MATTERMOST_WEBHOOK_URL"]
