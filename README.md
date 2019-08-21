@@ -21,7 +21,7 @@ MATTERMOST_CHANNEL                  | ` `                    | The name of the c
 MATTERMOST_USERNAME                 | ` `                    | The name of the sender of the message. ie, "GitHubAction"
 MATTERMOST_ICON                     | ` `                    | User/Bot icon shown with Mattermost message
 
-You can see the action block with all variables as below:
+You can see the action block with some variables as below:
 
 ```bash
 action "Mattermost Notification" {
