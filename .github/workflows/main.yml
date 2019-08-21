@@ -1,15 +1,13 @@
-name: CI
+workflow "Build and Deploy" {
+  on = "pull_request"
+}
 
-on: [pull_request]
+action "Generate" {
+  runs = ["sh", "-c", "echo '{\"text\":\"testing github action :tada:\"}' > mattermost.json"]
+}
 
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    steps:
-    - name: Run a multi-line script
-      run: |
-        echo "{\"text\":\"testing github action :tada:\"}" > mattermost.json
-        echo test, and deploy your project.
-    - uses: cpanato/action-mattermost-notify@master
-      secrets: ["MATTERMOST_WEBHOOK_URL"]
+action "Send Message" {
+  needs = ["Generate"]
+  uses = "cpanato/action-mattermost-notify@master"
+  secrets = ["MATTERMOST_WEBHOOK_URL"]
+}
