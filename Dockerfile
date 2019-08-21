@@ -6,7 +6,7 @@ LABEL repository="http://github.com/cpanato/action-mattermost-notify"
 LABEL homepage="http://github.com/cpanato/action-mattermost-notify"
 LABEL "com.github.actions.name"="Mattermost"
 LABEL "com.github.actions.description"="Send a Mattermost message"
-LABEL "com.github.actions.icon"="message-circle"
+LABEL "com.github.actions.icon"="send"
 LABEL "com.github.actions.color"="white"
 
 RUN go get github.com/cpanato/action-mattermost-notify
