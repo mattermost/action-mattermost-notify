@@ -1,15 +1,19 @@
 name: SEND_MSG
 
-on: [push, pull_request]
+on:
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run a multi-line script
+    - name: Generate Mattermost message
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
-        echo "{\"text\":\"testing github action :tada:\"}" > mattermost.json
+        echo "{\"text\":\"Pull Request Opened: $(echo $GITHUB_CONTEXT | jq -r '.event.pull_request._links.html.href')\"}" > mattermost.json
 
     - uses: cpanato/action-mattermost-notify@master
       env:
