@@ -23,13 +23,18 @@ MATTERMOST_ICON                     | ` `                    | User/Bot icon sho
 
 You can see the action block with some variables as below:
 
-```bash
-action "Mattermost Notification" {
-  uses = "cpanato/action-mattermost-notify@master"
-  env = {
-    MATTERMOST_CHANNEL = "ci",
-    MATTERMOST_USERNAME = "GitHubAction",
-  }
-  secrets = ["MATTERMOST_WEBHOOK_URL"]
-}
+```yaml
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Create the Mattermost Message
+      run: |
+        echo "{\"text\":\"testing github action :tada:\"}" > mattermost.json
+    - uses: cpanato/action-mattermost-notify@master
+      env:
+        MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
 ```
