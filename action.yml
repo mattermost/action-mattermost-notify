@@ -1,0 +1,5 @@
+name: 'Mattermost'
+description: 'Send message to your Mattermost instance'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
