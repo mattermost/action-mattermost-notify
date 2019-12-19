@@ -1,5 +1,9 @@
 name: 'Mattermost'
 description: 'Send message to your Mattermost instance'
+author: Mattermost
+branding:
+  icon: 'send'
+  color: 'blue'
 runs:
   using: 'docker'
   image: 'Dockerfile'
