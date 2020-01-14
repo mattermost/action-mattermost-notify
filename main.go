@@ -40,6 +40,11 @@ func main() {
 		msg.IconURL = s
 	}
 
+	if isEmpty(msg) {
+		log.Println("mattermost.json is empty exiting without failing.")
+		os.Exit(0)
+	}
+
 	err = Send(webhook, msg)
 	if err != nil {
 		log.Fatalf("error sending message: %s", err)
