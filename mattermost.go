@@ -8,7 +8,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/model"
+	"github.com/mattermost/mattermost-server/v5/model"
 )
 
 // ReadMessage reads a message from the given file.
@@ -24,6 +24,10 @@ func ReadMessage(path string) (*model.IncomingWebhookRequest, error) {
 	}
 
 	return iwr, nil
+}
+
+func isEmpty(msg *model.IncomingWebhookRequest) bool {
+	return msg.Text == "" || msg.Attachments == nil
 }
 
 // Send a message to the given webhook url.
