@@ -27,7 +27,7 @@ func ReadMessage(path string) (*model.IncomingWebhookRequest, error) {
 }
 
 func isEmpty(msg *model.IncomingWebhookRequest) bool {
-	return msg.Text == "" || msg.Attachments == nil
+	return msg.Text == "" && msg.Attachments == nil
 }
 
 // Send a message to the given webhook url.
