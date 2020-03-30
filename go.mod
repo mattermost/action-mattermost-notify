@@ -1,4 +1,4 @@
-module github.com/cpanato/action-mattermost-notify
+module github.com/mattermost/action-mattermost-notify
 
 go 1.13
 
