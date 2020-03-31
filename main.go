@@ -40,7 +40,7 @@ func main() {
 		msg.IconURL = s
 	}
 
-	if isEmpty(msg) {
+	if IsEmpty(msg) {
 		log.Println("mattermost.json is empty exiting without failing.")
 		os.Exit(0)
 	}

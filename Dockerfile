@@ -1,6 +1,6 @@
-FROM golang:1.13
+FROM golang:1.14
 
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 LABEL maintainer="mattermost"
 LABEL repository="http://github.com/mattermost/action-mattermost-notify"
 LABEL homepage="http://github.com/mattermost/action-mattermost-notify"
