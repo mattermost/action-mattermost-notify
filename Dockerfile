@@ -1,4 +1,4 @@
-FROM registry.redhat.io/rhel8/go-toolset:1.15 as builder
+FROM docker.io/golang:1.16 as builder
 
 ENV GOPATH=/go/
 USER root

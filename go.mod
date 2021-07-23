@@ -1,6 +1,6 @@
 module github.com/mattermost/action-mattermost-notify
 
-go 1.15
+go 1.16
 
 require (
 	github.com/mattermost/mattermost-server/v5 v5.37.0
