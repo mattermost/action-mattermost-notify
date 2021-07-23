@@ -1,6 +1,15 @@
-FROM golang:1.14
+FROM registry.redhat.io/rhel8/go-toolset:1.15 as builder
 
-LABEL version="1.0.2"
+ENV GOPATH=/go/
+USER root
+WORKDIR /app
+COPY . .
+RUN go mod vendor && \
+CGO_ENABLED=0 GOOS=linux go build -mod=vendor -o action-mattermost-notify .
+
+FROM scratch
+
+LABEL version="1.0.3"
 LABEL maintainer="mattermost"
 LABEL repository="http://github.com/mattermost/action-mattermost-notify"
 LABEL homepage="http://github.com/mattermost/action-mattermost-notify"
@@ -9,6 +18,5 @@ LABEL "com.github.actions.description"="Send a Mattermost message"
 LABEL "com.github.actions.icon"="send"
 LABEL "com.github.actions.color"="blue"
 
-RUN go get github.com/mattermost/action-mattermost-notify
-
+COPY --from=builder /app/action-mattermost-notify /bin/action-mattermost-notify
 ENTRYPOINT ["action-mattermost-notify"]
