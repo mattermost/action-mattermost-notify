@@ -4,12 +4,11 @@ ENV GOPATH=/go/
 USER root
 WORKDIR /app
 COPY . .
-RUN go mod vendor && \
-CGO_ENABLED=0 GOOS=linux go build -mod=vendor -o action-mattermost-notify .
+RUN CGO_ENABLED=0 GOOS=linux go build -mod=vendor -o action-mattermost-notify .
 
-FROM scratch
+FROM gcr.io/distroless/base
 
-LABEL version="1.0.3"
+LABEL version="1.1.0"
 LABEL maintainer="mattermost"
 LABEL repository="http://github.com/mattermost/action-mattermost-notify"
 LABEL homepage="http://github.com/mattermost/action-mattermost-notify"

@@ -38,6 +38,7 @@ jobs:
       env:
         MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
 ```
+
 ## Building
 
 To build the `action-mattermost-notify` app, use the `Dockerfile`:
