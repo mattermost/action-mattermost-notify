@@ -38,7 +38,7 @@ jobs:
       env:
         MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
 ```
-## Building 
+## Building
 
 To build the `action-mattermost-notify` app, use the `Dockerfile`:
 
@@ -47,5 +47,5 @@ podman build . -f ./Dockerfile -t action-mattermost-notify:local
 Or just build with:
 
 ```
-go build -mod=vendor -o action-mattermost-notify .
+go build -o action-mattermost-notify .
 ```
