@@ -1,7 +1,7 @@
 {
   "name": "action-mattermost-notify",
   "description": "GitHub Action for sending a notification to a Mattermost channel",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "author": "",
   "private": true,
   "homepage": "https://github.com/mattermost/action-mattermost-notify#readme",

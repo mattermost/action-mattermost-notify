@@ -1,17 +1,10 @@
-## Mattermost Actions
+## Github Action Mattermost notify
 
-[GitHub Actions](https://github.com/features/actions) for automating builds,
-deployments, and so on.
-
-- [Mattermost](https://mattermost.com) — Send Mattermost messages. Fork/inspired
-  from https://github.com/apex/actions/tree/master/slack
+[Mattermost](https://mattermost.com) — Send Mattermost messages. Fork/inspired
+from https://github.com/apex/actions/tree/master/slack
 
 For the message format you can check the
 [Mattermost documentation](https://developers.mattermost.com/integrate/webhooks/incoming/)
-
-Also you can check the files for example:
-
-- [Simple message](./mattermost_simple.json)
 
 ## Inputs
 
@@ -38,7 +31,7 @@ jobs:
     steps:
       - uses: mattermost/action-mattermost-notify@master
         env:
-          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
           MATTERMOST_CHANNEL: the-best-channel
           TEXT: |
             This is a message from ${{ github.repository }}.
@@ -58,8 +51,8 @@ jobs:
     steps:
       - uses: mattermost/action-mattermost-notify@master
         env:
-          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
-          PAYLOAD: |
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
+          PAYLOAD: |-
             {
               "text": "What a message from ${{ github.repository }}",
               "channel": "the-best-channel",

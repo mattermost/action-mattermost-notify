@@ -53,13 +53,12 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Test Local Action
-        id: test-action
+      - name: Test TEXT Local Action
         uses: ./
         with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.TEST_WEBHOOK_DELIVERY }}
           TEXT: |
-            This is a message from ${{ github.repository }}.
+            This is a TEXT message from ${{ github.repository }}.
             [Pipeline](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) was completed :white_check_mark:
-          MATTERMOST_USERNAME: ${{ github.triggering_actor }}
+          MATTERMOST_USERNAME: CI
           MATTERMOST_ICON_URL: https://cdn3.iconfinder.com/data/icons/system-basic-vol-4-1/20/icon-note-attention-alt3-512.png

@@ -20,8 +20,7 @@ async function run() {
     }
 
     const finalPayload = await generatePayload(inputs)
-    core.debug(`${finalPayload}`)
-
+    core.debug(`${JSON.stringify(finalPayload, undefined, 4)}`)
     await sendNotification(inputs.webhookURL, finalPayload)
   } catch (error) {
     core.setFailed(error.message)
@@ -29,20 +28,15 @@ async function run() {
 }
 
 async function sendNotification(webhookURL, payload) {
-  try {
-    const client = new http.HttpClient()
-    const response = await client.post(webhookURL, payload)
-    await response.readBody()
+  const client = new http.HttpClient()
+  const response = await client.post(webhookURL, JSON.stringify(payload))
+  await response.readBody()
 
-    if (response.message.statusCode === 200) {
-      core.info('Successfully sent notification!')
-    } else {
-      core.warning('Unexpected status code:', response.message.statusCode)
-      throw new Error(`Unexpected status code: ${response.message.statusCode}`)
-    }
-  } catch (error) {
-    core.setFailed(error.message)
-    throw error
+  if (response.message.statusCode === 200) {
+    core.info('Successfully sent notification!')
+  } else {
+    core.error(`Unexpected status code: ${response.message.statusCode}`)
+    throw new Error(`${response.message.statusMessage}`)
   }
 }
 
@@ -55,8 +49,8 @@ async function generatePayload(inputs) {
   }
 
   if (inputs.payload !== '') {
-    core.debug(`Will use the PAYLOAD input as is: ${inputs.payload}`)
-    return JSON.stringify(inputs.payload)
+    core.debug(`Will use the PAYLOAD input as is`)
+    return JSON.parse(inputs.payload)
   } else if (inputs.text !== '') {
     core.debug('Will use the TEXT input to generate the payload.')
 
@@ -67,7 +61,7 @@ async function generatePayload(inputs) {
       text: inputs.text
     }
 
-    return JSON.stringify(payload)
+    return payload
   } else {
     throw new Error('You need to provide TEXT or PAYLOAD input')
   }
