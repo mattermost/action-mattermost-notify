@@ -4,6 +4,34 @@ author: Mattermost
 branding:
   icon: 'send'
   color: 'blue'
+
+# Define your inputs here.
+inputs:
+  MATTERMOST_WEBHOOK_URL:
+    description: 'The Mattermost Incoming Webhook URL'
+    required: true
+  MATTERMOST_CHANNEL:
+    description: 'The Mattermost channel to sent the message'
+    required: false
+  MATTERMOST_USERNAME:
+    description: 'The Mattermost username shown in the webhook'
+    required: false
+  MATTERMOST_ICON_URL:
+    description: 'The Mattermost Icon URL for the webhook'
+    required: false
+  TEXT:
+    description: 'The text for the webhook message'
+    required: false
+  PAYLOAD:
+    description: 'The payload for the webhook'
+    required: false
+  PAYLOAD_FILENAME:
+    description: 'The payload file for the webhook'
+    required: false
+    default: mattermost.json
+    deprecationMessage:
+      This input is deprecated. Please migrate to TEXT or PAYLOAD variable
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: node20
+  main: dist/index.js
