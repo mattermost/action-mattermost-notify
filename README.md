@@ -37,7 +37,7 @@ jobs:
             This is a message from ${{ github.repository }}.
             [Pipeline](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) was completed :white_check_mark:
           MATTERMOST_USERNAME: ${{ github.triggering_actor }}
-          MATTERMOST_ICON: https://cdn3.iconfinder.com/data/icons/system-basic-vol-4-1/20/icon-note-attention-alt3-512.png
+          MATTERMOST_ICON_URL: https://cdn3.iconfinder.com/data/icons/system-basic-vol-4-1/20/icon-note-attention-alt3-512.png
 ```
 
 or alternatively you can use the `PAYLOAD` input:
