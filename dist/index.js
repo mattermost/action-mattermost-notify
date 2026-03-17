@@ -24950,7 +24950,7 @@ async function run() {
 }
 
 async function sendNotification(webhookURL, payload) {
-  const client = new http.HttpClient()
+  const client = new http.HttpClient('action-mattermost-notify')
   const response = await client.post(webhookURL, JSON.stringify(payload))
   await response.readBody()
 
