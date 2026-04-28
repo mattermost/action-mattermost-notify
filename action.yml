@@ -33,5 +33,5 @@ inputs:
       This input is deprecated. Please migrate to TEXT or PAYLOAD variable
 
 runs:
-  using: node20
+  using: node24
   main: dist/index.js
