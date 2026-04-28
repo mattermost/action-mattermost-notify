@@ -15,6 +15,7 @@ async function run() {
       username: core.getInput('MATTERMOST_USERNAME'),
       icon: core.getInput('MATTERMOST_ICON_URL'),
       text: core.getInput('TEXT'),
+      color: core.getInput('COLOR'),
       payload: core.getInput('PAYLOAD'),
       filename: core.getInput('PAYLOAD_FILENAME')
     }
@@ -28,7 +29,7 @@ async function run() {
 }
 
 async function sendNotification(webhookURL, payload) {
-  const client = new http.HttpClient()
+  const client = new http.HttpClient('action-mattermost-notify')
   const response = await client.post(webhookURL, JSON.stringify(payload))
   await response.readBody()
 
@@ -57,13 +58,33 @@ async function generatePayload(inputs) {
     const payload = {
       channel: inputs.channel,
       username: inputs.username,
-      icon_url: inputs.icon,
-      text: inputs.text
+      icon_url: inputs.icon
+    }
+
+    const color = resolveColor(inputs.color)
+    if (color) {
+      payload.attachments = [{ color, text: inputs.text }]
+    } else {
+      payload.text = inputs.text
     }
 
     return payload
   } else {
     throw new Error('You need to provide TEXT or PAYLOAD input')
+  }
+}
+
+function resolveColor(input) {
+  if (!input) return null
+  switch (input.toLowerCase()) {
+    case 'success':
+      return '#2EA043'
+    case 'failure':
+      return '#D40E0D'
+    case 'cancelled':
+      return '#808080'
+    default:
+      return input
   }
 }
 

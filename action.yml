@@ -22,6 +22,11 @@ inputs:
   TEXT:
     description: 'The text for the webhook message'
     required: false
+  COLOR:
+    description:
+      'The color for the message attachment sidebar (e.g. #2EA043 for green,
+      #D40E0D for red)'
+    required: false
   PAYLOAD:
     description: 'The payload for the webhook'
     required: false
